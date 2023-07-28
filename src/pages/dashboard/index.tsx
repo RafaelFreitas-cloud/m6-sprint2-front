@@ -1,33 +1,44 @@
-import { useEffect, useState } from "react"
-import { api } from "../../services/api"
-
-export interface Contact {
-    id: number,
-    name: string,
-    email: string,
-    phone: string,
-}
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+import { IContact } from "../../providers/@types";
+import { useUser } from "../../hooks/userHook";
 
 export const Dashboard = () => {
-    const [contacts, setContacts] = useState<Contact[]>([])
+  const { user, userLogout } = useUser();
+  const [contacts, setContacts] = useState<IContact[]>([]);
 
-    useEffect(()=>{
-        (async ()=> {
-            const response = await api.get<Contact[]>("/contacts")
+  useEffect(() => {
+    (async () => {
+      const response = await api.get<IContact[]>("/contacts");
 
-            setContacts(response.data)
-        })
-    },[])
+      setContacts(response.data);
+    })();
+  }, []);
 
-    return (
-        <>
-        <h1>Dashboard</h1>
+  return (
+    <>
+      <aside>
+        <div>
+          <button onClick={() => userLogout()}>Logout</button>
+        </div>
+        <div>
+          <button>Editar Perfil</button>
+          <button>Deletar Conta</button>
+        </div>
+        <div>
+          <h1>{user?.name}</h1>
+          <h2>{user?.email}</h2>
+          <h2>{user?.phone}</h2>
+        </div>
+      </aside>
+      <main>
+        <h1>Contatos</h1>
         <ul>
-            {
-                contacts.map(contact =><li key={contact.id}>{contact.name}</li>)
-            }
+          {contacts.map((contact) => (
+            <li key={contact.id}>{contact.name}</li>
+          ))}
         </ul>
-        </>
-
-    )
-}
+      </main>
+    </>
+  );
+};

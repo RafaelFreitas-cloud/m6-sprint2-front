@@ -1,20 +1,20 @@
 import { useForm } from "react-hook-form";
-import { TLoginData, schemaLogin } from "./validators";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "../../hooks/userHook";
+import { TLoginData, schemaLogin } from "../../validators/userValidators";
 
 export const Login = () => {
     const {register, handleSubmit} = useForm<TLoginData>({
         resolver: zodResolver(schemaLogin)
     })
 
-    const {singIn} = useAuth()
+    const {userLogin,goToRegister} = useUser()
 
   return (
     <main>
       <h2>Login</h2>
 
-      <form onSubmit={handleSubmit(singIn)}>
+      <form onSubmit={handleSubmit(userLogin)}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" {...register("email")}/>
         <label htmlFor="password">Senha</label>
@@ -22,6 +22,7 @@ export const Login = () => {
 
         <button type="submit">Entrar</button>
       </form>
+      <div>Não tem conta, <button onClick={()=>goToRegister()}>CLICK AQUI</button></div>
     </main>
   );
 };
