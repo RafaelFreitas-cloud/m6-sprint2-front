@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
-import { IContact } from "../../providers/@types";
 import { useUser } from "../../hooks/userHook";
+import { useEffect } from "react";
 
 export const Dashboard = () => {
-  const { user, userLogout } = useUser();
-  const [contacts, setContacts] = useState<IContact[]>([]);
+  const { user, userLogout, contacts, getContacts } = useUser();
 
   useEffect(() => {
-    (async () => {
-      const response = await api.get<IContact[]>("/contacts");
-
-      setContacts(response.data);
-    })();
+    getContacts();
   }, []);
+
+  // const [contacts, setContacts] = useState<IContact[]>([]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await api.get<IContact[]>("/contacts");
+  //     setContacts(response.data);
+  //   })();
+  // }, []);
 
   return (
     <>

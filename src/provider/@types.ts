@@ -4,6 +4,10 @@ import {
   TRegisterData,
   TUserUpdate,
 } from "../validators/userValidators";
+import {
+  TContactCreateData,
+  TContactUpdateData,
+} from "../validators/contactsCalidators";
 
 export interface UserProviderProps {
   children: ReactNode;
@@ -32,22 +36,27 @@ export interface UserContextValues {
   userDelete: () => Promise<void>;
   goToRegister: () => void;
   goToLogin: () => void;
-  loading: boolean;
+  contacts: IContact[];
+  setContacts: React.Dispatch<React.SetStateAction<IContact[]>>;
+  view: IContact | null;
+  setView: React.Dispatch<React.SetStateAction<IContact | null>>;
+  update: boolean;
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  createContact: (data: TContactCreateData) => Promise<void>;
+  getContacts: () => Promise<void>;
+  retrieveContact: () => Promise<void>;
+  updateContact: (contactId: number, data: TContactUpdateData) => Promise<void>;
+  deleteContact: (contactId: number) => Promise<void>;
 }
 
 export interface ContactProviderProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
 export interface IContact {
-    id: number;
-    name: string;
-    email: string;
-    phone: string;
-    createdAt: string;
-  }
-
-  export interface UserContextValues {
-    userLogin: (data: TLoginData) => Promise<void>;
-    // loading: boolean
-  }
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  createdAt: string;
+}

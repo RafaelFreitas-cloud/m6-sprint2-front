@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
+  IContact,
   IUser,
   LoginResponse,
   UserContextValues,
@@ -14,13 +15,19 @@ import {
   TRegisterData,
   TUserUpdate,
 } from "../validators/userValidators";
+import {
+  TContactCreateData,
+  TContactUpdateData,
+} from "../validators/contactsCalidators";
 
 export const UserContext = createContext({} as UserContextValues);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [loading, setLoading] = useState(true);
 
   const [user, setUser] = useState<IUser | null>(null);
+  const [contacts, setContacts] = useState<IContact[]>([]);
+  const [view, setView] = useState<IContact | null>(null);
+  const [update, setUpdate] = useState(false);
 
   const userId = localStorage.getItem("@ContactHub:ID");
   const token = localStorage.getItem("@ContactHub:TOKEN");
@@ -31,11 +38,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const token = localStorage.getItem("@ContactHub:TOKEN");
 
     if (!token) {
-      setLoading(false);
+  
       return;
     }
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
-    setLoading(false);
+ 
   }, []);
 
   const userProfile = async () => {
@@ -49,7 +56,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         navigate("/dashboard");
         setUser(response.data);
         localStorage.setItem("@ContactHub:ID", response.data.id);
-        
       } catch (error) {
         console.log(error);
       }
@@ -64,7 +70,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       localStorage.setItem("@ContactHub:TOKEN", token);
       toast.success("Login com sucesso");
-      setLoading(false);
+   
 
       navigate("/dashboard");
     } catch (error) {
@@ -76,14 +82,15 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const userLogout = () => {
     setUser(null);
     localStorage.removeItem("@ContactHub:TOKEN");
+    localStorage.removeItem("@ContactHub:ID");
     navigate("/");
   };
 
   const userCreate = async (data: TRegisterData) => {
     try {
       const response = await api.post<IUser>("/users", data);
-      setUser(response.data);
-      
+      console.log(response.data);
+
       toast.success("Cadastro com sucesso");
       navigate("/");
     } catch (error) {
@@ -143,12 +150,88 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     navigate("/");
   };
 
+  const createContact = async (data: TContactCreateData) => {
+    try {
+      const response = await api.post<IContact>("/contacts", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      toast.success("Contato criado com sucesso");
+    } catch (error) {
+      console.log(error);
+      toast.error(`${error}`);
+    }
+  };
+
+  const getContacts = async () => {
+    try {
+      const response = await api.get<IContact[]>("/contacts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setContacts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const retrieveContact = async () => {
+    try {
+      const response = await api.get<IContact>("/contacts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setView(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateContact = async (contactId: number, data: TContactUpdateData) => {
+    try {
+      const response = await api.patch<IContact>(
+        `/contaacts/${contactId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      toast.success("Contato atualizado com sucesso");
+    } catch (error) {
+      console.log(error);
+      toast.error(`${error}`);
+    }
+  };
+
+  const deleteContact = async (contactId: number) => {
+    try {
+      const response = await api.patch<IContact>(`/contaacts/${contactId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      toast.success("Contato deletado com sucesso");
+    } catch (error) {
+      console.log(error);
+      toast.error(`${error}`);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
         user,
         setUser,
-        loading,
         userLogin,
         userLogout,
         userProfile,
@@ -157,6 +240,17 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         userDelete,
         goToLogin,
         goToRegister,
+        contacts,
+        setContacts,
+        view,
+        setView,
+        update,
+        setUpdate,
+        createContact,
+        getContacts,
+        retrieveContact,
+        updateContact,
+        deleteContact,
       }}
     >
       {children}
