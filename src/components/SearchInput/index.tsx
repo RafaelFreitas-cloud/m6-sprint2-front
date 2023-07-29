@@ -8,20 +8,20 @@ export const SearchInput = () => {
   const {contacts, setContacts, getContacts} = useProvider()
 
   const [searchedItem, setSearchedItem] = useState<string>("");
-  const [searchWord, setSearchWord] = useState<string>("");
+  
 
 const reset = () => {
   getContacts()
 }
 
-  const search = (wordToSearch:string) => {
-    if (wordToSearch === "") {
+  const search = (searchedItem:string) => {
+    if (searchedItem === "") {
       toast.error("Digite alguma busca");
     } else {
       const searchedContact = contacts.filter((contact) => {
         return (
-          contact.name.toLowerCase().includes(wordToSearch.toLowerCase()) ||
-          contact.email.toLowerCase().includes(wordToSearch.toLowerCase())
+          contact.name.toLowerCase().includes(searchedItem.toLowerCase()) ||
+          contact.email.toLowerCase().includes(searchedItem.toLowerCase())
         );
       });
       setContacts(searchedContact);
@@ -31,7 +31,7 @@ const reset = () => {
   const submit = (e:any) => {
     e.preventDefault();
 
-    setSearchWord(searchedItem);
+ 
     search(searchedItem);
     setSearchedItem("");
   }
