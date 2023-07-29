@@ -28,26 +28,33 @@ export interface LoginResponse {
 export interface UserContextValues {
   user: IUser | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+  update: IUser | null
+  setUpdate: React.Dispatch<React.SetStateAction<IUser | null>>
   userLogin: (data: TLoginData) => Promise<void>;
   userLogout: () => void;
   userProfile: () => Promise<void>;
   userCreate: (data: TRegisterData) => Promise<void>;
-  userUpdate: (data: TUserUpdate) => Promise<void>;
-  userDelete: () => Promise<void>;
+  userUpdate: (userId: number, data: TUserUpdate) => Promise<void>
+  userDelete: (userId: number) => Promise<void>;
   goToRegister: () => void;
   goToLogin: () => void;
+  
   contacts: IContact[];
   setContacts: React.Dispatch<React.SetStateAction<IContact[]>>;
-  view: IContact | null;
-  setView: React.Dispatch<React.SetStateAction<IContact | null>>;
-  update: boolean;
-  setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  edit: IContact | null;
+  setEdit: React.Dispatch<React.SetStateAction<IContact | null>>;
   createContact: (data: TContactCreateData) => Promise<void>;
   getContacts: () => Promise<void>;
   retrieveContact: () => Promise<void>;
   updateContact: (contactId: number, data: TContactUpdateData) => Promise<void>;
   deleteContact: (contactId: number) => Promise<void>;
+  userdel: IContact | null
+  setUserdel: React.Dispatch<React.SetStateAction<IContact | null>>
+  contdel: IContact | null
+  setcontdel: React.Dispatch<React.SetStateAction<IContact | null>>
 }
+
+userdel, setUserdel
 
 export interface ContactProviderProps {
   children: ReactNode;

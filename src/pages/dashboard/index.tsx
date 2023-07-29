@@ -1,31 +1,35 @@
-import { useUser } from "../../hooks/userHook";
+import { ConfirmUserDelete } from "../../components/confirmUserDelete";
+import { ContactCard } from "../../components/contactCard";
+import { UpdateUserForm } from "../../components/updateUserForm";
+import { useProvider } from "../../hooks/providerHook";
 import { useEffect } from "react";
 
 export const Dashboard = () => {
-  const { user, userLogout, contacts, getContacts } = useUser();
+  const { user, userLogout, contacts, getContacts, update, setUpdate, userdel, setUserdel } = useProvider();
+
+
 
   useEffect(() => {
     getContacts();
   }, []);
 
-  // const [contacts, setContacts] = useState<IContact[]>([]);
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await api.get<IContact[]>("/contacts");
-  //     setContacts(response.data);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    getContacts();
+  }, [update]);
 
   return (
     <>
       <aside>
+      {update? <UpdateUserForm/> : null}
+      {userdel ? <ConfirmUserDelete/> : null}
         <div>
           <button onClick={() => userLogout()}>Logout</button>
         </div>
         <div>
-          <button>Editar Perfil</button>
-          <button>Deletar Conta</button>
+          <button onClick={()=>setUpdate(user)}>Editar Perfil</button>
+          <button onClick={()=> setUserdel(user)}>Deletar Conta</button>
         </div>
+        
         <div>
           <h1>{user?.name}</h1>
           <h2>{user?.email}</h2>
@@ -33,10 +37,14 @@ export const Dashboard = () => {
         </div>
       </aside>
       <main>
-        <h1>Contatos</h1>
+        <div>
+          <h1>Contatos</h1>
+          <button>add</button>
+        </div>
+
         <ul>
-          {contacts.map((contact) => (
-            <li key={contact.id}>{contact.name}</li>
+          {contacts.map((cont) => (
+            <ContactCard key={cont.id} name={cont.name} email={cont.email} phone={cont.phone} createdAt={cont.createdAt} id={cont.id}/>
           ))}
         </ul>
       </main>

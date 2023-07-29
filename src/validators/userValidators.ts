@@ -18,9 +18,10 @@ export type TLoginData = z.infer<typeof schemaLogin>
 
 export const schemaUserUpdate = z.object({
     name: z.string().optional(),
-    email: z.string().email().optional(),
+    email: z.string().optional(),
     phone: z.string().optional(),
     password: z.string().optional(),
 })
 
 export type TUserUpdate = z.infer<typeof schemaUserUpdate>
+

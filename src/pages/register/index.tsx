@@ -1,19 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { TRegisterData, schemaRegister } from "../../validators/userValidators";
-import { useUser } from "../../hooks/userHook";
-
-
+import { useProvider } from "../../hooks/providerHook";
 
 export const Register = () => {
-    const {register, handleSubmit} = useForm<TRegisterData>({
-        resolver: zodResolver(schemaRegister)
-    })
+  const { register, handleSubmit } = useForm<TRegisterData>({
+    resolver: zodResolver(schemaRegister),
+  });
 
-    const {userCreate,goToLogin} = useUser()
-  
-  
-    return (
+  const { userCreate, goToLogin } = useProvider();
+
+  return (
     <main>
       <h2>Register</h2>
 
@@ -30,10 +27,8 @@ export const Register = () => {
         <button type="submit">CADASTRAR</button>
       </form>
       <div>
-        Já tem conta,va para <button onClick={()=>goToLogin()}>LOGIN</button>
+        Já tem conta,va para <button onClick={() => goToLogin()}>LOGIN</button>
       </div>
     </main>
   );
 };
-
-

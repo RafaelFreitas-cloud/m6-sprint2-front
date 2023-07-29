@@ -23,13 +23,13 @@ import {
 export const UserContext = createContext({} as UserContextValues);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-
   const [user, setUser] = useState<IUser | null>(null);
   const [contacts, setContacts] = useState<IContact[]>([]);
-  const [view, setView] = useState<IContact | null>(null);
-  const [update, setUpdate] = useState(false);
+  const [edit, setEdit] = useState<IContact | null>(null);
+  const [update, setUpdate] = useState<IUser | null>(null);
+  const [userdel, setUserdel] = useState<IContact | null>(null);
+  const [contdel, setcontdel] = useState<IContact | null>(null);
 
-  const userId = localStorage.getItem("@ContactHub:ID");
   const token = localStorage.getItem("@ContactHub:TOKEN");
 
   const navigate = useNavigate();
@@ -38,11 +38,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const token = localStorage.getItem("@ContactHub:TOKEN");
 
     if (!token) {
-  
       return;
     }
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
- 
   }, []);
 
   const userProfile = async () => {
@@ -70,7 +68,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       localStorage.setItem("@ContactHub:TOKEN", token);
       toast.success("Login com sucesso");
-   
 
       navigate("/dashboard");
     } catch (error) {
@@ -99,8 +96,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  const userUpdate = async (data: TUserUpdate) => {
+  const userUpdate = async (userId: number, data: TUserUpdate) => {
     if (token) {
+
       try {
         const response = await api.patch<IUser>(`/users/${userId}`, data, {
           headers: {
@@ -117,7 +115,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  const userDelete = async () => {
+  const userDelete = async (userId:number) => {
     if (token) {
       try {
         const response = await api.delete<void>(`/users/${userId}`, {
@@ -187,7 +185,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         },
       });
 
-      setView(response.data);
+      setEdit(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -214,7 +212,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const deleteContact = async (contactId: number) => {
     try {
-      const response = await api.patch<IContact>(`/contaacts/${contactId}`, {
+      console.log(contactId);
+      console.log(token);
+
+      const response = await api.patch<IContact>(`/contacts/${contactId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -242,8 +243,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         goToRegister,
         contacts,
         setContacts,
-        view,
-        setView,
+        edit,
+        setEdit,
         update,
         setUpdate,
         createContact,
@@ -251,6 +252,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         retrieveContact,
         updateContact,
         deleteContact,
+        userdel, setUserdel, contdel, setcontdel
       }}
     >
       {children}
