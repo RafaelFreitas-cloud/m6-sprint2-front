@@ -4,10 +4,10 @@ import { StyledConfirmDelete } from "./style"
 
 export const ConfirmUserDelete = () => {
 
-    const {user, setUserdel, userDelete} = useProvider()
+    const {user, userDelete, setDelecao} = useProvider()
 
     const submit = () => {
-        setUserdel(null)
+        setDelecao(null)
         if(user){
             userDelete(user.id)
         } 
@@ -18,12 +18,12 @@ export const ConfirmUserDelete = () => {
             <StyledConfirmDelete>
                 <div>
                     <h3>Deletar Usuário</h3>
-                    <span onClick={()=>setUserdel(null)}>X</span>
+                    <span onClick={()=>setDelecao(null)}>X</span>
                 </div>
                 <h3>Confirma a deleção?</h3>
                 <div>
                     <button onClick={()=>submit()}>Confirmar</button>
-                    <button onClick={()=>setUserdel(null)}>Cancelar</button>
+                    <button onClick={()=>setDelecao(null)}>Cancelar</button>
                 </div>
             </StyledConfirmDelete>
         </StyleModalWrapper>

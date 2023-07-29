@@ -3,7 +3,7 @@ import { IContact } from "../../provider/@types";
 import { StyledContactCard } from "./style";
 
 export const ContactCard = (contact: IContact) => {
-  const { contacts, setContacts, deleteContact } = useProvider();
+  const { contacts, setContacts, deleteContact, setEdit } = useProvider();
 
   const contactDelete = (id: number) => {
     deleteContact(id);
@@ -20,7 +20,7 @@ export const ContactCard = (contact: IContact) => {
       <h5>Telefone</h5>
       <h3>{contact.phone}</h3>
       <div>
-        <button>Editar</button>
+        <button onClick={()=>setEdit(contact)}>Editar</button>
         <button onClick={() => contactDelete(contact.id)}>Deletar</button>
       </div>
     </StyledContactCard>

@@ -48,13 +48,12 @@ export interface UserContextValues {
   retrieveContact: () => Promise<void>;
   updateContact: (contactId: number, data: TContactUpdateData) => Promise<void>;
   deleteContact: (contactId: number) => Promise<void>;
-  userdel: IContact | null
-  setUserdel: React.Dispatch<React.SetStateAction<IContact | null>>
-  contdel: IContact | null
-  setcontdel: React.Dispatch<React.SetStateAction<IContact | null>>
+  delecao: IUser | null
+  setDelecao: React.Dispatch<React.SetStateAction<IUser | null>>
+  add: boolean
+  setAdd: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-userdel, setUserdel
 
 export interface ContactProviderProps {
   children: ReactNode;

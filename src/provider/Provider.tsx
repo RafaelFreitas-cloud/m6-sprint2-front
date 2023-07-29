@@ -27,8 +27,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [edit, setEdit] = useState<IContact | null>(null);
   const [update, setUpdate] = useState<IUser | null>(null);
-  const [userdel, setUserdel] = useState<IContact | null>(null);
-  const [contdel, setcontdel] = useState<IContact | null>(null);
+  const [delecao, setDelecao] = useState<IUser | null>(null);
+  const [add, setAdd] = useState<boolean>(false);
+  
 
   const token = localStorage.getItem("@ContactHub:TOKEN");
 
@@ -98,7 +99,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const userUpdate = async (userId: number, data: TUserUpdate) => {
     if (token) {
-
       try {
         const response = await api.patch<IUser>(`/users/${userId}`, data, {
           headers: {
@@ -115,7 +115,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  const userDelete = async (userId:number) => {
+  const userDelete = async (userId: number) => {
     if (token) {
       try {
         const response = await api.delete<void>(`/users/${userId}`, {
@@ -194,7 +194,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const updateContact = async (contactId: number, data: TContactUpdateData) => {
     try {
       const response = await api.patch<IContact>(
-        `/contaacts/${contactId}`,
+        `/contacts/${contactId}`,
         data,
         {
           headers: {
@@ -212,10 +212,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const deleteContact = async (contactId: number) => {
     try {
-      console.log(contactId);
-      console.log(token);
-
-      const response = await api.patch<IContact>(`/contacts/${contactId}`, {
+      const response = await api.delete<IContact>(`/contacts/${contactId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -252,7 +249,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         retrieveContact,
         updateContact,
         deleteContact,
-        userdel, setUserdel, contdel, setcontdel
+        delecao,
+        setDelecao,
+        add,
+        setAdd,
       }}
     >
       {children}

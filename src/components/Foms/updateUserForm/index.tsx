@@ -1,10 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { schemaUserUpdate, TUserUpdate } from "../../validators/userValidators";
+import {
+  schemaUserUpdate,
+  TUserUpdate,
+} from "../../../validators/userValidators";
 
-import { useProvider } from "../../hooks/providerHook";
+import { useProvider } from "../../../hooks/providerHook";
 import { StyledUpdateUseForm } from "./style";
-import { StyleModalWrapper } from "../modalWrapper/style";
+import { StyleModalWrapper } from "../../modalWrapper/style";
 
 export const UpdateUserForm = () => {
   const { register, handleSubmit } = useForm<TUserUpdate>({
@@ -49,6 +52,6 @@ export const UpdateUserForm = () => {
           <button type="submit">EDITAR</button>
         </form>
       </StyledUpdateUseForm>
-      </StyleModalWrapper>
+    </StyleModalWrapper>
   );
 };

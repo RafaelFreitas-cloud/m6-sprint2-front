@@ -8,7 +8,7 @@ export const contactCreateSchema = z.object({
 
 export const contactUpdateSchema = z.object({
     name: z.string().optional(),
-    email: z.string().email().optional(),
+    email: z.string().optional(),
     phone: z.string().optional(),
     
 })
