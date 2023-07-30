@@ -26,7 +26,7 @@ export const UpdateContactForm = () => {
     }
 
     if (edit) {
-      updateContact(edit.id, data);
+      updateContact(edit.id, nonEmptyData);
     }
 
     setEdit(null);
@@ -35,20 +35,19 @@ export const UpdateContactForm = () => {
   return (
     <StyleModalWrapper>
       <StyledUpdateContactForm>
-        <div>
-          <h3>Editar Contato</h3>
-          <div onClick={() => setEdit(null)}>X</div>
-        </div>
-
         <form onSubmit={handleSubmit(submit)}>
+          <div>
+            <h3>Editar Contato</h3>
+            <span onClick={() => setEdit(null)}>X</span>
+          </div>
           <label htmlFor="name">Nome</label>
-          <input type="text" id="name" {...register("name")} />
+          <input type="text" id="name" placeholder="Digite o nome..." {...register("name")} />
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" {...register("email")} />
+          <input type="email" id="email" placeholder="Digite o e-mail..." {...register("email")} />
           <label htmlFor="phone">Telefone</label>
-          <input type="text" id="phone" {...register("phone")} />
+          <input type="text" id="phone" placeholder="Digite o telefone..." {...register("phone")} />
 
-          <button type="submit">EDITAR</button>
+          <button className="btnForm" type="submit">EDITAR</button>
         </form>
       </StyledUpdateContactForm>
     </StyleModalWrapper>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledRegister = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px 14px;
@@ -53,7 +53,6 @@ display: flex;
       background-color: var(--color-gray-2);
       border-radius: 4px;
       padding-right: 10px;
-      
 
       .eye {
         cursor: pointer;
@@ -90,8 +89,4 @@ display: flex;
       max-width: 400px;
     }
   }
-
-
-  
-  
 `;

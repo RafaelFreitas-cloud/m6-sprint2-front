@@ -16,14 +16,14 @@ export const ConfirmUserDelete = () => {
     return(
         <StyleModalWrapper>
             <StyledConfirmDelete>
-                <div>
-                    <h3>Deletar Usuário</h3>
+                <div className="header">
+                    <h4>Deletar Usuário</h4>
                     <span onClick={()=>setDelecao(null)}>X</span>
                 </div>
                 <h3>Confirma a deleção?</h3>
-                <div>
-                    <button onClick={()=>submit()}>Confirmar</button>
-                    <button onClick={()=>setDelecao(null)}>Cancelar</button>
+                <div className="btnForm">
+                    <button  className="confirm" onClick={()=>submit()}>Confirmar</button>
+                    <button className="cancel" onClick={()=>setDelecao(null)}>Cancelar</button>
                 </div>
             </StyledConfirmDelete>
         </StyleModalWrapper>

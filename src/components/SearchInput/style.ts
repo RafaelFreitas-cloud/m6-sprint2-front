@@ -29,16 +29,22 @@ padding: 0;
       align-items: center;
       border-bottom: none;
       justify-content: space-between;
+      width: 110px;
+      padding: 0;
 
       button {
         height: 40px;
-        width: 60px;
+        width: 50px;
         background-color: var(--color-gray-3);
         color: white;
         border-radius: 4px;
         font-size: 0.7rem;
         margin-left: 5px;
         
+      }
+
+      .search{
+        background-color: var(--color-blue-1);
       }
     }
 

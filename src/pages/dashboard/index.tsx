@@ -48,12 +48,12 @@ export const Dashboard = () => {
       {add ? <CreateContactForm /> : null}
       {edit ? <UpdateContactForm /> : null}
 
-      <div>
+      <div className="border">
         <h2>ContactHub</h2>
         <button onClick={() => userLogout()}>Sair</button>
       </div>
 
-      <div className="perfil">
+      <div className="perfil border">
         <div className="info">
           <h3>{user?.name}</h3>
           <h4>{user?.email}</h4>
@@ -69,14 +69,14 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      <div className="contacts">
+      <div className="contacts border">
         <h3>Contatos - {quant}</h3>
         <button className="add" onClick={() => setAdd(true)}>Add</button>
       </div>
 
       <SearchInput />
 
-      {/* <ul className="list">
+      <ul className="list">
         {contacts.map((cont) => (
           <ContactCard
             key={cont.id}
@@ -87,7 +87,7 @@ export const Dashboard = () => {
             id={cont.id}
           />
         ))}
-      </ul> */}
+      </ul>
     </StyledDashboard>
   );
 };

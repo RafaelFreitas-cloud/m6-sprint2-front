@@ -25,6 +25,7 @@ export const UpdateUserForm = () => {
     }
 
     if (user) {
+  
       userUpdate(user.id, nonEmptyData as TUserUpdate);
     }
 
@@ -34,23 +35,26 @@ export const UpdateUserForm = () => {
   return (
     <StyleModalWrapper>
       <StyledUpdateUseForm>
-        <div>
-          <h3>Editar Usuário</h3>
-          <div onClick={() => setUpdate(null)}>X</div>
-        </div>
-
+        
+        
+        
         <form onSubmit={handleSubmit(submit)}>
+        <div className="header">
+          <h3>Editar Usuário</h3>
+          <span onClick={() => setUpdate(null)}>X</span>
+        </div>
           <label htmlFor="name">Nome</label>
-          <input type="text" id="name" {...register("name")} />
+          <input type="text" id="name" placeholder="Digite seu nome..." {...register("name")} />
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" {...register("email")} />
+          <input type="email" id="email" placeholder="Digite seu e-mail..." {...register("email")} />
           <label htmlFor="phone">Telefone</label>
-          <input type="text" id="phone" {...register("phone")} />
+          <input type="text" id="phone" placeholder="Digite seu telefone..." {...register("phone")} />
           <label htmlFor="password">Senha</label>
-          <input type="password" id="password" {...register("password")} />
+          <input type="password" id="password" placeholder="Digite sua senha..." {...register("password")} />
 
-          <button type="submit">EDITAR</button>
+          <button className="btnForm" type="submit">EDITAR</button>
         </form>
+        
       </StyledUpdateUseForm>
     </StyleModalWrapper>
   );

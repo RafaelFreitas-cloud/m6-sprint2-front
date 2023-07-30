@@ -23,20 +23,19 @@ export const CreateContactForm = () => {
   return (
     <StyleModalWrapper>
       <StyledCreateContactForm>
-        <div>
-        <h2>Adicionar Contato</h2>
-        <span onClick={()=>setAdd(false)}>X</span>
-        </div>
-        
         <form onSubmit={handleSubmit(submit)}>
+          <div>
+            <h3>Adicionar Contato</h3>
+            <span onClick={() => setAdd(false)}>X</span>
+          </div>
           <label htmlFor="name">Nome</label>
-          <input type="text" id="name" {...register("name")} />
+          <input type="text" id="name" placeholder="Digite o nome..." {...register("name")} />
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" {...register("email")} />
+          <input type="email" id="email" placeholder="Digite o e-mail..." {...register("email")} />
           <label htmlFor="phone">Telefone</label>
-          <input type="text" id="phone" {...register("phone")} />
+          <input type="text" id="phone" placeholder="Digite o telefone..." {...register("phone")} />
 
-          <button type="submit">ADICIONAR</button>
+          <button className="btnForm" type="submit">ADICIONAR</button>
         </form>
       </StyledCreateContactForm>
     </StyleModalWrapper>

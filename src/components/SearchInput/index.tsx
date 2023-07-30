@@ -39,11 +39,11 @@ export const SearchInput = () => {
         <input
           type="text"
           value={searchedItem}
-          placeholder="Digitar pesquisa"
+          placeholder="Digite sua pesquisa..."
           onChange={(e) => setSearchedItem(e.target.value)}
         />
         <div>
-          <button type="submit">Buscar</button>
+          <button className="search" type="submit">Buscar</button>
           <button type="reset" onClick={() => reset()}>
             Todos
           </button>

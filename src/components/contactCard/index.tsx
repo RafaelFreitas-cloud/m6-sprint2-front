@@ -13,15 +13,15 @@ export const ContactCard = (contact: IContact) => {
 
   return (
     <StyledContactCard>
-      <h5>Nome</h5>
-      <h2>{contact.name}</h2>
-      <h5>E-mail</h5>
+      <h4>Nome</h4>
+      <h3>{contact.name}</h3>
+      <h4>E-mail</h4>
       <h3>{contact.email}</h3>
-      <h5>Telefone</h5>
+      <h4>Telefone</h4>
       <h3>{contact.phone}</h3>
-      <div>
-        <button onClick={()=>setEdit(contact)}>Editar</button>
-        <button onClick={() => contactDelete(contact.id)}>Deletar</button>
+      <div className="btn">
+        <button className="upd" onClick={()=>setEdit(contact)}>Editar</button>
+        <button className="del" onClick={() => contactDelete(contact.id)}>Deletar</button>
       </div>
     </StyledContactCard>
   );
