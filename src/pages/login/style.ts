@@ -39,6 +39,7 @@ export const StyledLogin = styled.div`
       border-radius: 4px;
       height: 40px;
       padding: 0 10px;
+      font-size: 0.95rem;
     }
 
     input::placeholder {
@@ -76,6 +77,7 @@ export const StyledLogin = styled.div`
       color: var(--color-gray-1);
       font-size: 0.8rem;
       margin-top: 20px;
+      text-align: center;
     }
 
     .register {

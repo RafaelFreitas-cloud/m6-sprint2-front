@@ -1,43 +1,53 @@
 import styled from "styled-components";
 
-export const StyledSearchInput = styled.form`
-  width: 340px;
-  height: 60px;
-  border: 1px solid rgba(224, 224, 224, 1);
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
+export const StyledSearchInput = styled.div`
+width: 100%;
+padding: 0;
 
-  button {
-    width: 107px;
-    height: 40px;
-    border-radius: 8px;
-    background-color: var(--color-green-1);
-    color: rgba(255, 255, 255, 1);
-  }
+  form {
+    display: flex;
+    align-items: center;
+    width: 100%;
 
-  input {
-    font-size: 16px;
-    color: var(--color-gray-20);
-    padding-left: 10px;
-  }
-
-  input::placeholder {
-    font-size: 16px;
-    color: var(--color-gray-20);
-  
-  }
-
-  @media (max-width: 321px) {
-    width: 290px;
     input {
-      width: 170px;
+      width: 100%;
+      background-color: var(--color-gray-2);
+      color: rgba(134, 142, 150, 1);
+      border-radius: 4px;
+      height: 40px;
+      padding: 0 10px;
+      font-size: 0.95rem;
     }
-    button {
-    width: 90px;
-  }
+
+    input::placeholder {
+      color: rgba(134, 142, 150, 1);
+      font-size: 0.85rem;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      border-bottom: none;
+      justify-content: space-between;
+
+      button {
+        height: 40px;
+        width: 60px;
+        background-color: var(--color-gray-3);
+        color: white;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        margin-left: 5px;
+        
+      }
+    }
+
+    
+    @media (min-width: 1025px) {
+      form {
+        
+        padding: 0px 200px;
+      }
+    }
   }
 `;

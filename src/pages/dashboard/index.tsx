@@ -47,42 +47,47 @@ export const Dashboard = () => {
       {delecao ? <ConfirmUserDelete /> : null}
       {add ? <CreateContactForm /> : null}
       {edit ? <UpdateContactForm /> : null}
-      <aside>
-        <div>
-          <button onClick={() => userLogout()}>Logout</button>
-        </div>
-        <div>
-          <button onClick={() => setUpdate(user)}>Editar Perfil</button>
-          <button onClick={() => setDelecao(user)}>Deletar Conta</button>
-        </div>
 
-        <div>
-          <h1>{user?.name}</h1>
-          <h2>{user?.email}</h2>
-          <h2>{user?.phone}</h2>
-        </div>
-      </aside>
-      <main>
-        <div>
-          <h1>Contatos - {quant}</h1>
-          <button onClick={() => setAdd(true)}>add</button>
-        </div>
+      <div>
+        <h2>ContactHub</h2>
+        <button onClick={() => userLogout()}>Sair</button>
+      </div>
 
-        <SearchInput />
+      <div className="perfil">
+        <div className="info">
+          <h3>{user?.name}</h3>
+          <h4>{user?.email}</h4>
+          <h4>{user?.phone}</h4>
+        </div>
+        <div className="userBtn">
+          <button className="userUpd" onClick={() => setUpdate(user)}>
+            Editar
+          </button>
+          <button className="userDel" onClick={() => setDelecao(user)}>
+            Deletar
+          </button>
+        </div>
+      </div>
 
-        <ul>
-          {contacts.map((cont) => (
-            <ContactCard
-              key={cont.id}
-              name={cont.name}
-              email={cont.email}
-              phone={cont.phone}
-              createdAt={cont.createdAt}
-              id={cont.id}
-            />
-          ))}
-        </ul>
-      </main>
+      <div className="contacts">
+        <h3>Contatos - {quant}</h3>
+        <button className="add" onClick={() => setAdd(true)}>Add</button>
+      </div>
+
+      <SearchInput />
+
+      {/* <ul className="list">
+        {contacts.map((cont) => (
+          <ContactCard
+            key={cont.id}
+            name={cont.name}
+            email={cont.email}
+            phone={cont.phone}
+            createdAt={cont.createdAt}
+            id={cont.id}
+          />
+        ))}
+      </ul> */}
     </StyledDashboard>
   );
 };

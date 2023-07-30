@@ -17,27 +17,34 @@ export const Login = () => {
 
   return (
     <StyledLogin>
-    
-      <h2>ConectHub</h2>
+      <h2>ContactHub</h2>
 
       <form onSubmit={handleSubmit(userLogin)}>
         <h3>Login</h3>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="Digite seu email" {...register("email")} />
+        <input
+          type="email"
+          id="email"
+          placeholder="Digite seu e-mail..."
+          {...register("email")}
+        />
         <label htmlFor="password">Senha</label>
         <div>
           <input
             id="password"
             type={isHidden ? "password" : "text"}
-            placeholder="Digite sua senha"
+            placeholder="Digite sua senha..."
             {...register("password")}
           />
           <FaEye className="eye" onClick={() => setIsHidden(!isHidden)} />
         </div>
         <button type="submit">Entrar</button>
-      
         <p>Ainda não possui uma conta?</p>
-        <button className="register" type="button" onClick={()=>goToRegister()}>
+        <button
+          className="register"
+          type="button"
+          onClick={() => goToRegister()}
+        >
           Cadastrar
         </button>
       </form>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useProvider } from "../../hooks/providerHook";
 import { toast } from "react-toastify";
+import { StyledSearchInput } from "./style";
 
 export const SearchInput = () => {
   const { contacts, setContacts, getContacts } = useProvider();
@@ -13,7 +14,7 @@ export const SearchInput = () => {
 
   const search = (searchedItem: string) => {
     if (searchedItem === "") {
-      toast.error("Digite alguma busca");
+      toast.error("Digite alguma busca...");
     } else {
       const searchedContact = contacts.filter((contact) => {
         return (
@@ -33,17 +34,21 @@ export const SearchInput = () => {
   };
 
   return (
-    <form onSubmit={submit}>
-      <input
-        type="text"
-        value={searchedItem}
-        placeholder="Digitar pesquisa"
-        onChange={(e) => setSearchedItem(e.target.value)}
-      />
-      <button type="submit">Pesquisar</button>
-      <button type="reset" onClick={() => reset()}>
-        Todos
-      </button>
-    </form>
+    <StyledSearchInput>
+      <form onSubmit={submit}>
+        <input
+          type="text"
+          value={searchedItem}
+          placeholder="Digitar pesquisa"
+          onChange={(e) => setSearchedItem(e.target.value)}
+        />
+        <div>
+          <button type="submit">Buscar</button>
+          <button type="reset" onClick={() => reset()}>
+            Todos
+          </button>
+        </div>
+      </form>
+    </StyledSearchInput>
   );
 };
