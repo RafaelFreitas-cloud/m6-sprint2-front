@@ -1,13 +1,12 @@
 import { ConfirmUserDelete } from "../../components/confirmUserDelete";
 import { ContactCard } from "../../components/contactCard";
-import {
-  CreateContactForm,
-} from "../../components/Foms/createContactFrom";
+import { CreateContactForm } from "../../components/Foms/createContactFrom";
 import { UpdateContactForm } from "../../components/Foms/updateContactForm";
 import { UpdateUserForm } from "../../components/Foms/updateUserForm";
-import { SearchInput } from "../../components/SearchInput"
+import { SearchInput } from "../../components/SearchInput";
 import { useProvider } from "../../hooks/providerHook";
 import { useEffect } from "react";
+import { StyledDashboard } from "./style";
 
 export const Dashboard = () => {
   const {
@@ -43,7 +42,7 @@ export const Dashboard = () => {
   const quant = contacts.length;
 
   return (
-    <>
+    <StyledDashboard>
       {update ? <UpdateUserForm /> : null}
       {delecao ? <ConfirmUserDelete /> : null}
       {add ? <CreateContactForm /> : null}
@@ -69,7 +68,7 @@ export const Dashboard = () => {
           <button onClick={() => setAdd(true)}>add</button>
         </div>
 
-        <SearchInput/>
+        <SearchInput />
 
         <ul>
           {contacts.map((cont) => (
@@ -84,6 +83,6 @@ export const Dashboard = () => {
           ))}
         </ul>
       </main>
-    </>
+    </StyledDashboard>
   );
 };

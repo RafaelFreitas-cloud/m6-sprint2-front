@@ -1,20 +1,17 @@
-
 import { useState } from "react";
 import { useProvider } from "../../hooks/providerHook";
 import { toast } from "react-toastify";
 
 export const SearchInput = () => {
-
-  const {contacts, setContacts, getContacts} = useProvider()
+  const { contacts, setContacts, getContacts } = useProvider();
 
   const [searchedItem, setSearchedItem] = useState<string>("");
-  
 
-const reset = () => {
-  getContacts()
-}
+  const reset = () => {
+    getContacts();
+  };
 
-  const search = (searchedItem:string) => {
+  const search = (searchedItem: string) => {
     if (searchedItem === "") {
       toast.error("Digite alguma busca");
     } else {
@@ -26,15 +23,14 @@ const reset = () => {
       });
       setContacts(searchedContact);
     }
-  }
-  
-  const submit = (e:any) => {
+  };
+
+  const submit = (e: any) => {
     e.preventDefault();
 
- 
     search(searchedItem);
     setSearchedItem("");
-  }
+  };
 
   return (
     <form onSubmit={submit}>
@@ -45,9 +41,9 @@ const reset = () => {
         onChange={(e) => setSearchedItem(e.target.value)}
       />
       <button type="submit">Pesquisar</button>
-      <button type="reset" onClick={()=>reset()}>Todos</button>
+      <button type="reset" onClick={() => reset()}>
+        Todos
+      </button>
     </form>
   );
-}
-
-
+};

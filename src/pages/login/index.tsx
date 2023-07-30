@@ -2,8 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useProvider } from "../../hooks/providerHook";
 import { TLoginData, schemaLogin } from "../../validators/userValidators";
+import { StyledLogin } from "./style";
+import { FaEye } from "react-icons/fa";
+import { useState } from "react";
 
 export const Login = () => {
+  const [isHidden, setIsHidden] = useState<boolean>(true);
+
   const { register, handleSubmit } = useForm<TLoginData>({
     resolver: zodResolver(schemaLogin),
   });
@@ -11,21 +16,31 @@ export const Login = () => {
   const { userLogin, goToRegister } = useProvider();
 
   return (
-    <main>
-      <h2>Login</h2>
+    <StyledLogin>
+    
+      <h2>ConectHub</h2>
 
       <form onSubmit={handleSubmit(userLogin)}>
+        <h3>Login</h3>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" {...register("email")} />
+        <input type="email" id="email" placeholder="Digite seu email" {...register("email")} />
         <label htmlFor="password">Senha</label>
-        <input type="password" id="password" {...register("password")} />
-
+        <div>
+          <input
+            id="password"
+            type={isHidden ? "password" : "text"}
+            placeholder="Digite sua senha"
+            {...register("password")}
+          />
+          <FaEye className="eye" onClick={() => setIsHidden(!isHidden)} />
+        </div>
         <button type="submit">Entrar</button>
+      
+        <p>Ainda não possui uma conta?</p>
+        <button className="register" type="button" onClick={()=>goToRegister()}>
+          Cadastrar
+        </button>
       </form>
-      <div>
-        Não tem conta,{" "}
-        <button onClick={() => goToRegister()}>CLICK AQUI</button>
-      </div>
-    </main>
+    </StyledLogin>
   );
 };

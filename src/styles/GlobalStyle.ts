@@ -2,37 +2,33 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
    :root {
-    --color-blue-900: #0d47a1;
-    --color-blue-800: #1565c0;
-    --color-blue-700: #1976d2;
+    --color-blue-3: #0d47a1;
+    --color-blue-2: #1565c0;
+    --color-blue-1: #1976d2;
     --color-blue-600: #1e88e5;
     --color-blue-500: #2196f3;
     --color-blue-400: #42a5f5;
     --color-blue-300: #64b5f6;
     --color-blue-200: #90caf9;
     --color-blue-100: #bbdefb;
-    --color-gray-900: #212121;
-    --color-gray-800: #424242;
-    --color-gray-700: #616161;
-    --color-gray-600: #757575;
-    --color-gray-500: #9e9e9e;
-    --color-gray-400: #bdbdbd;
-    --color-gray-300: #e0e0e0;
-    --color-gray-200: #eeeeee;
-    --color-gray-100: #f5f5f5;
+    --color-gray-0: #f8f9fa;
+    --color-gray-1: #868e96;
+    --color-gray-2: #343b41;
+    --color-gray-3: #212529;
+    --color-gray-4: #121214;
 
-    font-size: 60%;   
+       
   }
 
   /* font-size: 16px;
   1rem = 10px
   */
 
-  @media (min-width: 700px) {
+  /* @media (min-width: 700px) {
     :root {
       font-size: 62.5%; // root font-size: 10px;
     }
-  }
+  } */
   
   * {
     margin:0;
@@ -47,7 +43,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--color-gray-900);
+    font-family: 'Inter', sans-serif;
+    background: var(--color-gray-4);
     color: var(--color-gray-300);
     -webkit-font-smoothing: antialiased;
 

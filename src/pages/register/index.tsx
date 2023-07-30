@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { TRegisterData, schemaRegister } from "../../validators/userValidators";
 import { useProvider } from "../../hooks/providerHook";
+import { StyledRegister } from "./style";
 
 export const Register = () => {
   const { register, handleSubmit } = useForm<TRegisterData>({
@@ -11,7 +12,7 @@ export const Register = () => {
   const { userCreate, goToLogin } = useProvider();
 
   return (
-    <main>
+    <StyledRegister>
       <h2>Register</h2>
 
       <form onSubmit={handleSubmit(userCreate)}>
@@ -29,6 +30,6 @@ export const Register = () => {
       <div>
         Já tem conta,va para <button onClick={() => goToLogin()}>LOGIN</button>
       </div>
-    </main>
+    </StyledRegister>
   );
 };
