@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useProvider } from "../../hooks/providerHook";
 import { toast } from "react-toastify";
 import { StyledSearchInput } from "./style";
+import { IContact } from "../../provider/@types";
+import { api } from "../../services/api";
 
 export const SearchInput = () => {
-  const { contacts, setContacts, getContacts } = useProvider();
+  const { setContacts, getContacts } = useProvider();
 
   const [searchedItem, setSearchedItem] = useState<string>("");
 
@@ -12,14 +14,16 @@ export const SearchInput = () => {
     getContacts();
   };
 
-  const search = (searchedItem: string) => {
+  const search = async (searchedItem: string) => {
     if (searchedItem === "") {
       toast.error("Digite alguma busca...");
     } else {
-      const searchedContact = contacts.filter((contact) => {
+      const contacts = await api.get<IContact[]>("/contacts");
+      const searchedContact = contacts.data.filter((contact) => {
         return (
           contact.name.toLowerCase().includes(searchedItem.toLowerCase()) ||
-          contact.email.toLowerCase().includes(searchedItem.toLowerCase())
+          contact.email.toLowerCase().includes(searchedItem.toLowerCase()) ||
+          contact.phone.toLowerCase().includes(searchedItem.toLowerCase())
         );
       });
       setContacts(searchedContact);
@@ -43,7 +47,9 @@ export const SearchInput = () => {
           onChange={(e) => setSearchedItem(e.target.value)}
         />
         <div>
-          <button className="search" type="submit">Buscar</button>
+          <button className="search" type="submit">
+            Buscar
+          </button>
           <button type="reset" onClick={() => reset()}>
             Todos
           </button>

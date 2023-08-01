@@ -29,7 +29,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [update, setUpdate] = useState<IUser | null>(null);
   const [delecao, setDelecao] = useState<IUser | null>(null);
   const [add, setAdd] = useState<boolean>(false);
-  
+  const [contMonitoration, setcontMonitoration] = useState<boolean>(false);
 
   const token = localStorage.getItem("@ContactHub:TOKEN");
 
@@ -156,6 +156,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         },
       });
       console.log(response.data);
+      setcontMonitoration(!contMonitoration)
       toast.success("Contato criado com sucesso");
     } catch (error) {
       console.log(error);
@@ -203,6 +204,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         }
       );
       console.log(response.data);
+      setcontMonitoration(!contMonitoration)
       toast.success("Contato atualizado com sucesso");
     } catch (error) {
       console.log(error);
@@ -218,6 +220,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         },
       });
       console.log(response.data);
+      setcontMonitoration(!contMonitoration)
       toast.success("Contato deletado com sucesso");
     } catch (error) {
       console.log(error);
@@ -253,6 +256,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         setDelecao,
         add,
         setAdd,
+        contMonitoration,
+        setcontMonitoration,
       }}
     >
       {children}

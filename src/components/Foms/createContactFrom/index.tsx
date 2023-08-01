@@ -24,7 +24,7 @@ export const CreateContactForm = () => {
     <StyleModalWrapper>
       <StyledCreateContactForm>
         <form onSubmit={handleSubmit(submit)}>
-          <div>
+          <div className="header">
             <h3>Adicionar Contato</h3>
             <span onClick={() => setAdd(false)}>X</span>
           </div>

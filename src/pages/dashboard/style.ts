@@ -9,6 +9,10 @@ export const StyledDashboard = styled.div`
   .border{
     border-bottom: 1px solid var(--color-gray-2);
   } 
+  .header{
+    padding-top: 15px;
+    border-bottom: 1px solid var(--color-gray-2);
+  }
   
   div {
     display: flex;

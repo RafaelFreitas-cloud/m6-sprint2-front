@@ -36,7 +36,7 @@ export const UpdateContactForm = () => {
     <StyleModalWrapper>
       <StyledUpdateContactForm>
         <form onSubmit={handleSubmit(submit)}>
-          <div>
+          <div className="header">
             <h3>Editar Contato</h3>
             <span onClick={() => setEdit(null)}>X</span>
           </div>

@@ -12,6 +12,7 @@ export const Dashboard = () => {
   const {
     user,
     userLogout,
+    userProfile,
     contacts,
     getContacts,
     update,
@@ -21,6 +22,7 @@ export const Dashboard = () => {
     edit,
     add,
     setAdd,
+    contMonitoration
   } = useProvider();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    getContacts();
+    userProfile();
   }, [update]);
 
   useEffect(() => {
@@ -38,6 +40,10 @@ export const Dashboard = () => {
   useEffect(() => {
     getContacts();
   }, [edit]);
+
+  useEffect(() => {
+    getContacts();
+  }, [contMonitoration]);
 
   const quant = contacts.length;
 

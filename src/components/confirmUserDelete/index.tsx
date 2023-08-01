@@ -20,7 +20,7 @@ export const ConfirmUserDelete = () => {
                     <h4>Deletar Usuário</h4>
                     <span onClick={()=>setDelecao(null)}>X</span>
                 </div>
-                <h3>Confirma a deleção?</h3>
+                <h3>Confirmar a deleção?</h3>
                 <div className="btnForm">
                     <button  className="confirm" onClick={()=>submit()}>Confirmar</button>
                     <button className="cancel" onClick={()=>setDelecao(null)}>Cancelar</button>

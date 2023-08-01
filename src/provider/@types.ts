@@ -52,6 +52,8 @@ export interface UserContextValues {
   setDelecao: React.Dispatch<React.SetStateAction<IUser | null>>
   add: boolean
   setAdd: React.Dispatch<React.SetStateAction<boolean>>
+  contMonitoration: boolean
+  setcontMonitoration: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
