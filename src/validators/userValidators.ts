@@ -25,3 +25,4 @@ export const schemaUserUpdate = z.object({
 
 export type TUserUpdate = z.infer<typeof schemaUserUpdate>
 
+
